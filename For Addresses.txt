@@ -1,0 +1,43 @@
+> use Restaurent
+switched to db Restaurent
+>db.Addresses.find().pretty()
+
+>db.Addresses.find({},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1,_id: 0})
+
+>db.Addresses.find({},{name: 1,restaurant_id: 1,"address.zipcode": 1,borough: 1,_id: 0})
+
+>db.Addresses.find({borough:'Bronx'}).limit(5).pretty()
+
+>db.Addresses.find({borough:'Bronx'}).pretty()
+
+>db.Addresses.find({borough:'Bronx'}).skip(5).limit(5).pretty()
+
+>db.Addresses.find({"grades.score":{$gt:90}})
+
+>db.Addresses.find({$and: [{"grades.score": { $gt: 80 } },{"grades.score": { $lt: 100 } }]}).pretty()
+
+>db.Addresses.find({"Address.coord":{$lt:-95.754168}})
+
+>db.Addresses.find({$and: [{cuisine:{$ne:'American'} },{"grades.score": { $gt: 70 } },{$expr: {$lt: [{$arrayElemAt: ["$Address.coord", 0]}, -65.754168]}}]} ).pretty()
+
+>db.Addresses.find({$and: [{cuisine:{$ne:'American'} },{"grades.score": { $gt: 70 } },{$expr: {$gt: [{$arrayElemAt: ["$Address.coord", 1]}, -65.754168]}}]} ).pretty()
+
+>db.Addresses.find({$and: [{cuisine:{$ne:'American'} },{"grades.grade": 'A' },{borough:'Brooklyn'}]} ).sort({cuisine: -1})
+
+>db.Addresses.find({name:/^Wil/},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({"name": { "$regex": "ces$" }},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({name:/Reg/},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({$and: [{borough:'Bronx'},{$or: [{cuisine:'American' },{cuisine:'Chinese' }]}]})
+
+>db.Addresses.find({$or: [{borough:'Staten Island' },{borough:'Bronxor Brooklyn' },{borough:'Queens' }]},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({ borough: { $nin: [ 'Staten Island', 'Bronxor Brooklyn','Queens' ]} },{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({"grades.score":{$lte:10}},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
+
+>db.Addresses.find({$or: [{ cuisine: { $nin: [ 'American', 'Chinees','Queens' ]} },{name:/^Wil/}]},{name: 1,restaurant_id: 1,cuisine: 1,borough: 1})
